@@ -39,9 +39,9 @@ public class DemoPageSteps {
 
 
     @Then("the user verifies text input should contain {string}")
-    public void theUserVerifiesTextInputShouldContainValue(String expectedText) throws InterruptedException {
+    public void theUserVerifiesTextInputShouldContainValue(String expectedText)  {
         Assert.assertEquals(expectedText, demoPage.getTextInputFieldValue());
-        wait(2000);
+
 
        // demoPage.closeBrowser();
         driver.quit();
@@ -65,9 +65,9 @@ public class DemoPageSteps {
     }
 
     @Then("user verifies it should be checked")
-    public void userVerifiesItShouldBeChecked() throws InterruptedException {
+    public void userVerifiesItShouldBeChecked() {
         Assert.assertTrue(demoPage.isIframeCheckboxSelected());
-        wait(2000);
+
         driver.quit();
     }
 
@@ -78,9 +78,9 @@ public class DemoPageSteps {
     }
 
     @Then("the HTML meter should change to {string}")
-    public void theHTMLMeterShouldChangeTo(String expectedValue) throws InterruptedException {
+    public void theHTMLMeterShouldChangeTo(String expectedValue) {
         Assert.assertEquals(expectedValue, demoPage.getMeterValue());
-        wait(2000);
+
         driver.quit();
 
     }
