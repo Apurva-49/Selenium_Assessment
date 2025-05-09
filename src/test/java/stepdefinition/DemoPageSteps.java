@@ -8,7 +8,10 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import io.github.bonigarcia.wdm.WebDriverManager;
+
 import pages.DemoPage;
+
+
 
 public class DemoPageSteps {
 
@@ -19,11 +22,9 @@ public class DemoPageSteps {
 
 
 
-
     @Given("user navigates to demo page")
     public void userNavigatesToDemoPage() {
-       // System.setProperty("webdriver.chrome.driver", "C:/Users/ApurvaAgarwal/chromedriver-win64"); // Replace with actual path
-      //  System.setProperty("webdriver.chrome.driver", "C://Users//ApurvaAgarwal//chromedriver-win64//chromedriver.exe");
+
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         driver.get("https://seleniumbase.io/demo_page");
@@ -39,11 +40,11 @@ public class DemoPageSteps {
 
 
     @Then("the user verifies text input should contain {string}")
-    public void theUserVerifiesTextInputShouldContainValue(String expectedText)  {
+    public void theUserVerifiesTextInputShouldContainValue(String expectedText) throws InterruptedException {
         Assert.assertEquals(expectedText, demoPage.getTextInputFieldValue());
 
 
-       // demoPage.closeBrowser();
+
         driver.quit();
     }
 

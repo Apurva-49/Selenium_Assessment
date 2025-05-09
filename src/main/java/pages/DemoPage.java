@@ -10,28 +10,36 @@ public class DemoPage {
 
     // Locators
 
-    By textInput = By.id("myTextInput");
-    By svgRect = By.id("svgRect");
-    By iframe = By.id("myFrame3");
-    By dropdown = By.id("mySelect");
-    By htmlMeter = By.id("meterBar");
+    private WebElement getElementById(String id) {
+        return driver.findElement(By.id(id));
+    }
+    WebElement textInput=null;
+    WebElement svgRect =null;
+    WebElement iframe = null;
+    WebElement dropdown = null;
+    WebElement htmlMeter = null;
 
 
     public void enterTextInputField(String text) {
-        driver.findElement(textInput).clear();
-        driver.findElement(textInput).sendKeys(text);
+        textInput = getElementById("myTextInput");
+
+        textInput.clear();
+       textInput.sendKeys(text);
     }
 
     public String getTextInputFieldValue() {
-        return driver.findElement(textInput).getAttribute("value");
+        textInput = getElementById("myTextInput");
+        return textInput.getAttribute("value");
     }
 
     public String getSvgRectColor() {
-        return driver.findElement(svgRect).getAttribute("fill");
+        svgRect = getElementById("svgRect");
+        return svgRect.getAttribute("fill");
     }
 
     public void toggleIframeCheckbox() {
-        driver.switchTo().frame(driver.findElement(iframe));
+        iframe=getElementById("myFrame3");
+        driver.switchTo().frame((iframe));
         WebElement checkbox = driver.findElement(By.cssSelector("input[type='checkbox']"));
         if (checkbox.isSelected()) {
             System.out.println("Checkbox is already selected");
@@ -44,23 +52,24 @@ public class DemoPage {
     }
 
     public boolean isIframeCheckboxSelected() {
-        driver.switchTo().frame(driver.findElement(iframe));
+        iframe=getElementById("myFrame3");
+        driver.switchTo().frame((iframe));
         boolean isIframeCheckboxSelected = driver.findElement(By.cssSelector("input[type='checkbox']")).isSelected();
         driver.switchTo().defaultContent();
         return isIframeCheckboxSelected;
     }
 
     public void selectDropdownOption(String visibleText) {
-        Select dropdownElement = new Select(driver.findElement(dropdown));
+       dropdown=getElementById("mySelect");
+        Select dropdownElement = new Select(dropdown);
         dropdownElement.selectByVisibleText(visibleText);
     }
 
     public String getMeterValue() {
-        return driver.findElement(htmlMeter).getAttribute("value");
+        htmlMeter=getElementById("meterBar");
+        return htmlMeter.getAttribute("value");
     }
 
-    public void closeBrowser() {
-        driver.quit();
-    }
+
 }
 
