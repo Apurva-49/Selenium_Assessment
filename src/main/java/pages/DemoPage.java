@@ -14,7 +14,7 @@ public class DemoPage {
         return driver.findElement(By.id(id));
     }
     WebElement textInput=null;
-    WebElement svgRect =null;
+    WebElement HTMLsvgRect =null;
     WebElement iframe = null;
     WebElement dropdown = null;
     WebElement htmlMeter = null;
@@ -33,8 +33,8 @@ public class DemoPage {
     }
 
     public String getSvgRectColor() {
-        svgRect = getElementById("svgRect");
-        return svgRect.getAttribute("fill");
+        HTMLsvgRect = getElementById("svgRect");
+        return HTMLsvgRect.getAttribute("fill");
     }
 
     public void toggleIframeCheckbox() {
