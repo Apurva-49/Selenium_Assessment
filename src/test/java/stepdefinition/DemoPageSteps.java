@@ -1,63 +1,51 @@
 package stepdefinition;
 
-import io.cucumber.java.en.And;
+import io.cucumber.java.After;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import io.github.bonigarcia.wdm.WebDriverManager;
 
 import pages.DemoPage;
+import base.DriverFactory;
 
-
-
-public class DemoPageSteps {
-
+public class DemoPageSteps
+{
     WebDriver driver;
     DemoPage demoPage;
     String svgColor;
 
-
-
-
-    @Given("user navigates to demo page")
+    @Given("user navigates to the demo page")
     public void userNavigatesToDemoPage() {
 
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
+        driver = DriverFactory.getDriver();
         driver.get("https://seleniumbase.io/demo_page");
         driver.manage().window().maximize();
         demoPage = new DemoPage(driver);
     }
 
-    @When("user fills in the Text input field with {string}")
+    @When("user fills in the text input field with {string}")
     public void userFillsInTheTextInputField(String text) {
         demoPage.enterTextInputField(text);
         
     }
 
+    @Then("user verifies the text input field contains {string}")
+    public void theUserVerifiesTextInputShouldContainValue(String expectedText) {
+        Assert.assertEquals(expectedText,demoPage.getTextInputFieldValue());
 
-    @Then("the user verifies text input should contain {string}")
-    public void theUserVerifiesTextInputShouldContainValue(String expectedText) throws InterruptedException {
-        Assert.assertEquals(expectedText, demoPage.getTextInputFieldValue());
-
-
-
-        driver.quit();
     }
 
-
-    @When("user get the color from the SVG rectangle")
+    @When("user retrieves the color from the SVG rectangle")
     public void userGetTheColorFromTheSVGRectangle() {
         svgColor = demoPage.getSvgRectColor();
     }
 
-    @Then("user print the color value")
+    @Then("user prints the color value")
     public void userPrintTheColorValue() {
         System.out.println("SVG Color: " + svgColor);
-        driver.quit();
+
     }
 
     @When("user toggles the checkbox in the iframe")
@@ -65,26 +53,26 @@ public class DemoPageSteps {
         demoPage.toggleIframeCheckbox();
     }
 
-    @Then("user verifies it should be checked")
+    @Then("user verifies the checkbox is checked")
     public void userVerifiesItShouldBeChecked() {
         Assert.assertTrue(demoPage.isIframeCheckboxSelected());
 
-        driver.quit();
     }
 
-    @When("user set the dropdown to {string}")
+    @When("user sets the dropdown to {string}")
     public void userSetTheDropdown(String arg0) {
         demoPage.selectDropdownOption(arg0);
-
     }
 
-    @Then("the HTML meter should change to {string}")
+    @Then("user verifies the HTML meter changes to {string}")
     public void theHTMLMeterShouldChangeTo(String expectedValue) {
         Assert.assertEquals(expectedValue, demoPage.getMeterValue());
 
-        driver.quit();
-
     }
 
+    @After
+    public void tearDown() {
+        DriverFactory.quitDriver();
+    }
 
 }

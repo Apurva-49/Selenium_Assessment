@@ -8,13 +8,14 @@ public class DemoPage {
         this.driver = driver;
     }
 
-    // Locators
 
     private WebElement getElementById(String id) {
         return driver.findElement(By.id(id));
     }
+
+    // Locators
     WebElement textInput=null;
-    WebElement HTMLsvgRect =null;
+    WebElement HTMLSvgRect =null;
     WebElement iframe = null;
     WebElement dropdown = null;
     WebElement htmlMeter = null;
@@ -33,8 +34,8 @@ public class DemoPage {
     }
 
     public String getSvgRectColor() {
-        HTMLsvgRect = getElementById("svgRect");
-        return HTMLsvgRect.getAttribute("fill");
+        HTMLSvgRect = getElementById("svgRect");
+        return HTMLSvgRect.getAttribute("fill");
     }
 
     public void toggleIframeCheckbox() {
